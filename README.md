@@ -1,2 +1,2 @@
 # Back Pocket (Front End)
-A Cognitive Behavioral Therapy inspired app for building creative coping tools.
+A Cognitive Behavioral Therapy inspired app for creative coping tools you can keep in your digital back pocket.
