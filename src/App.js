@@ -1,6 +1,16 @@
+/*================== TOOLS ===============*/
 import axios from 'axios'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
+/*========== COMPONENT IMPORTS ===========*/
+import Landing from './components/Landing'
+import CreateAccount from './components/CreateAccount'
+import Home from './components/Home'
+import Library from './components/Library'
+import Nav from './components/Nav'
+
+/*============= APP FUNCTION =============*/
 function App() {
 
     const getNotes = () => {
@@ -14,22 +24,16 @@ function App() {
     }
 
     return (
-        <div>
+        <Router>
+            <Nav />
             <h1>Back Pocket App</h1>
             <button onClick={getNotes}>Get Notes</button>
-        </div>
+            <Route path="/landing" component={Landing} />
+            <Route path="/account" component={CreateAccount} />
+            <Route path="/home" component={Home} />
+            <Route path="/library" component={Library} />
+        </Router>
     )
 }
 
 export default App
-
-// class App extends React.Component {
-//
-//     render() {
-//         return (
-//             <div>
-//                 <h1>Clare's React App!!!</h1>
-//             </div>
-//         )
-//     }
-// }
