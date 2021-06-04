@@ -1,41 +1,35 @@
 import axios from 'axios'
 import React from 'react'
 
-class App extends React.Component {
+function App() {
 
-    render() {
-        return (
-            <div>
-                <h1>Clare's React App!!!</h1>
-            </div>
+    const getNotes = () => {
+        axios
+        .get('https://tranquil-wildwood-78396.herokuapp.com/pocket/notes')
+        .then(
+            (response) => {
+                console.log(response.data);
+            }
         )
     }
+
+    return (
+        <div>
+            <h1>Back Pocket App</h1>
+            <button onClick={getNotes}>Get Notes</button>
+        </div>
+    )
 }
 
 export default App
 
-// import logo from './logo.svg';
-// import './App.css';
+// class App extends React.Component {
 //
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
+//     render() {
+//         return (
+//             <div>
+//                 <h1>Clare's React App!!!</h1>
+//             </div>
+//         )
+//     }
 // }
-//
-// export default App;
