@@ -104,7 +104,6 @@ function CreateCard() {
             <form onSubmit={postNewCard}>
                 <label>Author</label>
                 <br />
-                {/*<select onChange={e => setCardAuthor(e.target.value)}>*/}
                 <select onChange={updateAuthor}>
                     {availUsers.map(user => {
                         return (
