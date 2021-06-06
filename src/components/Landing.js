@@ -16,10 +16,12 @@ function Landing() {
         // } else {
         //     console.log('This user is not Clare');
         // }
+        // Could I change the back end route so that I could send this request to something like: pocket/users/<username> and then say IF response => setUser to response.data.username?
         axios
         .get('https://tranquil-wildwood-78396.herokuapp.com/pocket/users')
         .then(
             (response) => {
+                // if the database returns a username that matches the one entered, set the state of the app's user to that user (that way we'll be able to conditionally render data depending on who it belongs to)
                 console.log(response.data);
                 for (let i = 0; i < response.data.length; i++) {
                     console.log("Response data " + i + ": " + response.data[i].username);
