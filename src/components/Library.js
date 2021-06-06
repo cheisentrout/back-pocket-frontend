@@ -2,6 +2,9 @@
 // import axios from 'axios'
 import React from 'react'
 
+/*====== FILES =====*/
+import AddImage from './AddImage'
+import CreateCard from './CreateCard'
 
 function Library() {
     return (

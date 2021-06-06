@@ -1,6 +1,7 @@
 /*================== TOOLS ===============*/
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
+import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 /*========== COMPONENT IMPORTS ===========*/
@@ -9,13 +10,15 @@ import CreateAccount from './components/CreateAccount'
 import Home from './components/Home'
 import Library from './components/Library'
 import Nav from './components/Nav'
+import AddNote from './components/AddNote'
+import CreateCard from './components/CreateCard'
 
 /*============= APP FUNCTION =============*/
 function App() {
 
-    const getNotes = () => {
+    const getCards = () => {
         axios
-        .get('https://tranquil-wildwood-78396.herokuapp.com/pocket/notes')
+        .get('https://tranquil-wildwood-78396.herokuapp.com/pocket/cards')
         .then(
             (response) => {
                 console.log(response.data);
@@ -27,13 +30,18 @@ function App() {
         <Router>
             <Nav />
             <h1>Back Pocket App</h1>
-            <button onClick={getNotes}>Get Notes</button>
+            <button onClick={getCards}>Get Cards</button>
+            <Route path="/home" component={Home}/>
             <Route path="/landing" component={Landing} />
             <Route path="/account" component={CreateAccount} />
-            <Route path="/home" component={Home} />
-            <Route path="/library" component={Library} />
+            <Route path="/createcard" component={CreateCard} />
         </Router>
     )
 }
+
+ReactDOM.render(
+    <App />,
+    document.getElementById('root')
+)
 
 export default App
