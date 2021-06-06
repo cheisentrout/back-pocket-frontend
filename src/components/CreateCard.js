@@ -51,7 +51,7 @@ function CreateCard() {
                 <label>Author</label>
                 <br />
                 {/* Uncomment when I've figured out how to run the axios call before page load: */}
-                <select>
+                <select onChange={e => setCardAuthor(e.target.value)}>
                     {availUsers.map(user => {
                         return (
                             <option value={user.id}>{user.username}</option>
