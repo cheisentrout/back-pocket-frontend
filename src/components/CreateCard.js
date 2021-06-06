@@ -4,20 +4,20 @@ import React, { useState, useEffect } from 'react'
 
 function CreateCard() {
 
-    const [cardAuthor, setCardAuthor] = useState('')
-    const [cardTitle, setCardTitle] = useState('')
-    const [cardText, setCardText] = useState('')
-    const [cardImg, setCardImg] = useState('')
-    const [cardVisibility, setCardVisibility] = useState(false)
+    // const [cardAuthor, setCardAuthor] = useState('')
+    // const [cardTitle, setCardTitle] = useState('')
+    // const [cardText, setCardText] = useState('')
+    // const [cardImg, setCardImg] = useState('')
+    // const [cardVisibility, setCardVisibility] = useState(false)
 
-    // Running into an issue where this axios call isn't complete before the component loads, so it initially thinks there ARE no available users -- look into useEffect for this?
+    // Running into an issue where this axios call isn't complete before the component loads, so it initially thinks there ARE no available users -- look into useEffect for this? -- FIX: this was fixed by adding an array of one "dummy" object to briefly load before the axios call in useEffect could be completed
     const [availUsers, setAvailUsers] = useState([{
         id: null,
         username: ''
     }])
 
+    // This queries the back end for user data as soon as the component loads, and sets the state of the component to include the db's response:
     useEffect(() => {
-        console.log("This is the component mount");
         axios
         .get('https://tranquil-wildwood-78396.herokuapp.com/pocket/users')
         .then(
@@ -27,31 +27,61 @@ function CreateCard() {
         )
     }, [])
 
-    console.log(availUsers);
+    // My thought here was: if we have a newCard object who's state updates dynamically, we can set the keys to the form fields on the back end, and the values to the states that are being updated by each form field on the front end. Every time someone changes the cardTitle, ideally the newCard state would update as well...
+    // const [newCard, setNewCard] = useState({
+    //     user: cardAuthor,
+    //     title: cardTitle,
+    //     card_text: cardText,
+    //     card_image: cardImg,
+    //     public: cardVisibility
+    // })
 
-    const [newCard, setNewCard] = useState({
-        // Card model structure?
-        user: cardAuthor,
-        title: cardTitle,
-        card_text: cardText,
-        card_image: cardImg,
-        public: cardVisibility
-    })
+    const [state, setState] = useState(
+        {
+            user: '',
+            title: '',
+            card_text: '',
+            card_image: '',
+            cardPublic: false
+        }
+    )
 
-    const postNewCard = (e, newCard) => {
+    const user = state.user
+    const title = state.title
+    const card_text = state.card_text
+    const card_img = state.card_img
+    const cardPublic = state.cardPublic
+
+    // WHERE I'M STUCK: how to take the full input of the form below and send it as a newCard object to the post route
+    // In class components, we would use the form to update the entire state of a component, then pass this.state as an object to the post route.
+    //
+    const postNewCard = (e) => {
         e.preventDefault()
-        console.log("post new card");
-        console.log("New card:" + newCard);
+        axios
+        .post('https://tranquil-wildwood-78396.herokuapp.com/pocket/cards', newCard)
+        .then(
+            (response) => {
+                console.log(response);
+            }
+        )
     }
+
+    function updateAuthor(e) {
+        setState(prevState => {
+            return {...prevState, author: e.target.value}
+        })
+    }
+
+    // console.log(newCard);
 
     return (
         <div>
             <h1>Create Card Component</h1>
-            <form>
+            <form onSubmit={postNewCard}>
                 <label>Author</label>
                 <br />
-                {/* Uncomment when I've figured out how to run the axios call before page load: */}
-                <select>
+                {/*<select onChange={e => setCardAuthor(e.target.value)}>*/}
+                <select onChange={updateAuthor(e)}>
                     {availUsers.map(user => {
                         return (
                             <option value={user.id}>{user.username}</option>
@@ -79,14 +109,26 @@ function CreateCard() {
                     type="text"
                     onChange={e => setCardText(e.target.value)}
                 />
+                <br />
+                <label>Public</label>
+                <input
+                    type="checkbox"
+                    onChange
+                />
+                <br />
+                <div className="card-preview">
+                    <img src={cardImg} alt="card-image" />
+                    <p>{cardText}</p>
+                </div>
+                <input
+                    type="submit"
+                    value="Create Card"
+                />
             </form>
-            <div className="card-preview">
-                <img src={cardImg} alt="card-image" />
-                <p>{cardText}</p>
-            </div>
 
             {/*========== CREATE CARD FORM ===========*/}
-            <form onSubmit={postNewCard}>
+
+            {/*<form onSubmit={postNewCard}>
                 <input
                     type="hidden"
                     readOnly
@@ -103,17 +145,9 @@ function CreateCard() {
                     type="submit"
                     value="Create Card"
                 />
-            </form>
+            </form>*/}
         </div>
     )
 }
 
 export default CreateCard
-
-// <select>
-//     {availUsers.map(user => {
-//         return (
-//             <option value={user.id}>{user.username}</option>
-//         )
-//     })}
-// </select>
