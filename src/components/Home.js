@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 /*===== FILES =====*/
 import CreateCard from './CreateCard'
 import CreateAccount from './CreateAccount'
+import EditCard from './EditCard'
 
 function Home() {
 
@@ -32,12 +33,20 @@ function Home() {
             <Link to="/createcard">Add Card</Link>
             <section>
                 <button onClick={getCards}>Load Cards</button>
-                {cards.map(card => {
+                {cards.map((card) => {
                     return (
-                        <div className="card" id={card.id}>
-                            <img src={card.card_img} alt={card.title} />
-                            <p>{card.card_text}</p>
-                        </div>
+                        <>
+                            <div className="card" id={card.id}>
+                                <img src={card.card_img} alt={card.title} />
+                                <p>{card.card_text}</p>
+                            </div>
+                            <details>
+                            <summary>Edit Card</summary>
+                                <EditCard
+                                    card={card}
+                                />
+                            </details>
+                        </>
                     )
                 })}
             </section>
