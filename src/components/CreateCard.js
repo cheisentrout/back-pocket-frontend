@@ -41,7 +41,7 @@ function CreateCard() {
             user: '',
             title: '',
             card_text: '',
-            card_image: '',
+            card_img: '',
             cardPublic: false
         }
     )
@@ -57,8 +57,10 @@ function CreateCard() {
     //
     const postNewCard = (e) => {
         e.preventDefault()
+        console.log("Post new card fired");
+        console.log(state);
         axios
-        .post('https://tranquil-wildwood-78396.herokuapp.com/pocket/cards', newCard)
+        .post('https://tranquil-wildwood-78396.herokuapp.com/pocket/cards', state)
         .then(
             (response) => {
                 console.log(response);
@@ -68,11 +70,33 @@ function CreateCard() {
 
     function updateAuthor(e) {
         setState(prevState => {
-            return {...prevState, author: e.target.value}
+            return {...prevState, user: e.target.value}
         })
     }
 
-    // console.log(newCard);
+    function updateTitle(e) {
+        setState(prevState => {
+            return {...prevState, title: e.target.value}
+        })
+    }
+
+    function updateImg(e) {
+        setState(prevState => {
+            return {...prevState, card_img: e.target.value}
+        })
+    }
+
+    function updateText(e) {
+        setState(prevState => {
+            return {...prevState, card_text: e.target.value}
+        })
+    }
+
+    function updateCardPublic(e) {
+        setState(prevState => {
+            return {...prevState, cardPublic: e.target.value}
+        })
+    }
 
     return (
         <div>
@@ -81,7 +105,7 @@ function CreateCard() {
                 <label>Author</label>
                 <br />
                 {/*<select onChange={e => setCardAuthor(e.target.value)}>*/}
-                <select onChange={updateAuthor(e)}>
+                <select onChange={updateAuthor}>
                     {availUsers.map(user => {
                         return (
                             <option value={user.id}>{user.username}</option>
@@ -93,32 +117,32 @@ function CreateCard() {
                 <br />
                 <input
                     type="text"
-                    onChange={e => setCardTitle(e.target.value)}
+                    onChange={updateTitle}
                 />
                 <br />
                 <label>Card Image</label>
                 <br />
                 <input
                     type="text"
-                    onChange={e => setCardImg(e.target.value)}
+                    onChange={updateImg}
                 />
                 <br />
                 <label>Card Text</label>
                 <br />
                 <input
                     type="text"
-                    onChange={e => setCardText(e.target.value)}
+                    onChange={updateText}
                 />
                 <br />
                 <label>Public</label>
                 <input
                     type="checkbox"
-                    onChange
+                    onChange={updateCardPublic}
                 />
                 <br />
                 <div className="card-preview">
-                    <img src={cardImg} alt="card-image" />
-                    <p>{cardText}</p>
+                    <img src={state.card_img} alt="card-image" />
+                    <p>{state.card_text}</p>
                 </div>
                 <input
                     type="submit"
