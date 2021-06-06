@@ -12,6 +12,7 @@ import Library from './components/Library'
 import Nav from './components/Nav'
 import AddNote from './components/AddNote'
 import CreateCard from './components/CreateCard'
+import EditCard from './components/EditCard'
 
 /*============= APP FUNCTION =============*/
 function App() {
@@ -35,6 +36,7 @@ function App() {
             <Route path="/landing" component={Landing} />
             <Route path="/createaccount" component={CreateAccount} />
             <Route path="/createcard" component={CreateCard} />
+            <Route path="/editcard" component={EditCard} />
         </Router>
     )
 }
