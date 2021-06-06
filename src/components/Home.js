@@ -18,7 +18,7 @@ function Home() {
             (response) => {
                 console.log(response.data); // This logs an array of 4 objects
                 setCards(response.data)
-                console.log("Cards array in state: " + cards); // "cards" logs nothing here
+                console.log("Cards array in state: " + cards); // "cards" logs nothing here, why?
             }
         )
     }
