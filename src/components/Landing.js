@@ -16,7 +16,7 @@ function Landing() {
         // } else {
         //     console.log('This user is not Clare');
         // }
-        // Could I change the back end route so that I could send this request to something like: pocket/users/<username> and then say IF response => setUser to response.data.username?
+        // Could I change the back end route so that I could send this request to something like: pocket/users/<username> and then say IF response (data that matches the username entered)=> setUser to response.data.username?
         axios
         .get('https://tranquil-wildwood-78396.herokuapp.com/pocket/users')
         .then(

@@ -33,7 +33,7 @@ function App() {
             <button onClick={getCards}>Get Cards</button>
             <Route path="/home" component={Home}/>
             <Route path="/landing" component={Landing} />
-            <Route path="/account" component={CreateAccount} />
+            <Route path="/createaccount" component={CreateAccount} />
             <Route path="/createcard" component={CreateCard} />
         </Router>
     )

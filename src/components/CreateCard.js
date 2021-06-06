@@ -4,12 +4,6 @@ import React, { useState, useEffect } from 'react'
 
 function CreateCard() {
 
-    // const [cardAuthor, setCardAuthor] = useState('')
-    // const [cardTitle, setCardTitle] = useState('')
-    // const [cardText, setCardText] = useState('')
-    // const [cardImg, setCardImg] = useState('')
-    // const [cardVisibility, setCardVisibility] = useState(false)
-
     // Running into an issue where this axios call isn't complete before the component loads, so it initially thinks there ARE no available users -- look into useEffect for this? -- FIX: this was fixed by adding an array of one "dummy" object to briefly load before the axios call in useEffect could be completed
     const [availUsers, setAvailUsers] = useState([{
         id: null,
@@ -57,8 +51,6 @@ function CreateCard() {
     //
     const postNewCard = (e) => {
         e.preventDefault()
-        console.log("Post new card fired");
-        console.log(state);
         axios
         .post('https://tranquil-wildwood-78396.herokuapp.com/pocket/cards', state)
         .then(
@@ -66,7 +58,15 @@ function CreateCard() {
                 console.log(response);
             }
         )
+
     }
+
+    // Refactor so one update function for multiple properties?
+    // function update(e, property) {
+    //     setState(prevState => {
+    //         return (...prevState, property: e.target.value)
+    //     })
+    // }
 
     function updateAuthor(e) {
         setState(prevState => {
@@ -102,6 +102,7 @@ function CreateCard() {
         <div>
             <h1>Create Card Component</h1>
             <form onSubmit={postNewCard}>
+
                 <label>Author</label>
                 <br />
                 <select onChange={updateAuthor}>
@@ -112,6 +113,7 @@ function CreateCard() {
                     })}
                 </select>
                 <br />
+
                 <label>Title</label>
                 <br />
                 <input
@@ -119,6 +121,7 @@ function CreateCard() {
                     onChange={updateTitle}
                 />
                 <br />
+
                 <label>Card Image</label>
                 <br />
                 <input
@@ -126,6 +129,7 @@ function CreateCard() {
                     onChange={updateImg}
                 />
                 <br />
+
                 <label>Card Text</label>
                 <br />
                 <input
@@ -133,42 +137,24 @@ function CreateCard() {
                     onChange={updateText}
                 />
                 <br />
+
                 <label>Public</label>
                 <input
                     type="checkbox"
                     onChange={updateCardPublic}
                 />
                 <br />
+
                 <div className="card-preview">
-                    <img src={state.card_img} alt="card-image" />
-                    <p>{state.card_text}</p>
+                    <img src={card_img} alt="card-image" />
+                    <p>{card_text}</p>
                 </div>
+
                 <input
                     type="submit"
                     value="Create Card"
                 />
             </form>
-
-            {/*========== CREATE CARD FORM ===========*/}
-
-            {/*<form onSubmit={postNewCard}>
-                <input
-                    type="hidden"
-                    readOnly
-                    value={cardImg}
-                    name="card_img"
-                />
-                <input
-                    type="hidden"
-                    readOnly
-                    value={cardText}
-                    name="card_text"
-                />
-                <input
-                    type="submit"
-                    value="Create Card"
-                />
-            </form>*/}
         </div>
     )
 }

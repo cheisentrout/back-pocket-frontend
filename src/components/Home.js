@@ -1,6 +1,6 @@
 /*===== TOOLS =====*/
 import axios from 'axios'
-import React, { Component, useState } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 /*===== FILES =====*/
@@ -10,6 +10,8 @@ import CreateAccount from './CreateAccount'
 function Home() {
 
     const [cards, setCards] = useState([])
+
+    //Add a useEffect hook here so that the cards mount on page load?
 
     const getCards = () => {
         axios
