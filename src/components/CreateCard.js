@@ -1,6 +1,7 @@
 /*======== TOOLS ========*/
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
+import 'react-router-dom'
 
 function CreateCard() {
 
@@ -40,11 +41,11 @@ function CreateCard() {
         }
     )
 
-    const user = state.user
+    // const user = state.user
     const title = state.title
     const card_text = state.card_text
     const card_img = state.card_img
-    const cardPublic = state.cardPublic
+    // const cardPublic = state.cardPublic
 
     // WHERE I'M STUCK: how to take the full input of the form below and send it as a newCard object to the post route
     // In class components, we would use the form to update the entire state of a component, then pass this.state as an object to the post route.
@@ -146,7 +147,7 @@ function CreateCard() {
                 <br />
 
                 <div className="card-preview">
-                    <img src={card_img} alt="card-image" />
+                    <img src={card_img} alt={title} />
                     <p>{card_text}</p>
                 </div>
 

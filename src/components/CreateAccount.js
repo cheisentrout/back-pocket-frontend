@@ -26,11 +26,11 @@ function CreateAccount() {
         }
     )
 
-    const first_name = state.first_name
-    const last_name = state.last_name
-    const username = state.username
-    const password = state.password
-    const profile_pic = state.profile_pic
+    // const first_name = state.first_name
+    // const last_name = state.last_name
+    // const username = state.username
+    // const password = state.password
+    // const profile_pic = state.profile_pic
 
     return (
         <div>

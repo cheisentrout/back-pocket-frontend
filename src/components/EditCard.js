@@ -9,7 +9,6 @@ function EditCard({card}) {
         username: ''
     }])
 
-    // This queries the back end for user data as soon as the component loads, and sets the state of the component to include the db's response:
     useEffect(() => {
         axios
         .get('https://tranquil-wildwood-78396.herokuapp.com/pocket/users')
@@ -19,15 +18,6 @@ function EditCard({card}) {
             }
         )
     }, [])
-
-    // My thought here was: if we have a newCard object who's state updates dynamically, we can set the keys to the form fields on the back end, and the values to the states that are being updated by each form field on the front end. Every time someone changes the cardTitle, ideally the newCard state would update as well...
-    // const [newCard, setNewCard] = useState({
-    //     user: cardAuthor,
-    //     title: cardTitle,
-    //     card_text: cardText,
-    //     card_image: cardImg,
-    //     public: cardVisibility
-    // })
 
     const [state, setState] = useState(
         {
@@ -39,15 +29,12 @@ function EditCard({card}) {
         }
     )
 
-    const user = state.user
+    // const user = state.user
     const title = state.title
     const card_text = state.card_text
     const card_img = state.card_img
-    const cardPublic = state.cardPublic
+    // const cardPublic = state.cardPublic
 
-    // WHERE I'M STUCK: how to take the full input of the form below and send it as a newCard object to the post route
-    // In class components, we would use the form to update the entire state of a component, then pass this.state as an object to the post route.
-    //
     const updateCard = (e) => {
         e.preventDefault()
         axios
@@ -64,13 +51,6 @@ function EditCard({card}) {
         axios
         .delete(`https://tranquil-wildwood-78396.herokuapp.com/pocket/cards/${card.id}`)
     }
-
-    // Refactor so one update function for multiple properties?
-    // function update(e, property) {
-    //     setState(prevState => {
-    //         return (...prevState, property: e.target.value)
-    //     })
-    // }
 
     function updateAuthor(e) {
         setState(prevState => {
@@ -150,7 +130,7 @@ function EditCard({card}) {
                 <br />
 
                 <div className="card-preview">
-                    <img src={card_img} alt="card-image" />
+                    <img src={card_img} alt={title} />
                     <p>{card_text}</p>
                 </div>
 

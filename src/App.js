@@ -1,6 +1,6 @@
 /*================== TOOLS ===============*/
 import axios from 'axios'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
@@ -8,9 +8,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Landing from './components/Landing'
 import CreateAccount from './components/CreateAccount'
 import Home from './components/Home'
-import Library from './components/Library'
 import Nav from './components/Nav'
-import AddNote from './components/AddNote'
 import CreateCard from './components/CreateCard'
 import EditCard from './components/EditCard'
 
