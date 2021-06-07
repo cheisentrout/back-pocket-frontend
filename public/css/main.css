@@ -1,3 +1,11 @@
+#root {
+    font-family: 'sen';
+}
+
+.site-wrapper {
+    margin: 20px;
+}
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -15,4 +23,12 @@ nav {
 
 li {
     margin: 5px;
+}
+
+option {
+    cursor: pointer;
+}
+
+option:hover {
+    background: whitesmoke;
 }
