@@ -1,10 +1,12 @@
 /*======== TOOLS ========*/
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
-import 'react-router-dom'
+import { Link, useHistory, withRouter } from 'react-router-dom'
+import { Button, FormGroup, InputLabel, Input, FormControl, FormHelperText, Select, Checkbox, TextareaAutosize} from '@material-ui/core'
 
 function CreateCard() {
 
+    const history = useHistory()
     // Running into an issue where this axios call isn't complete before the component loads, so it initially thinks there ARE no available users -- look into useEffect for this? -- FIX: this was fixed by adding an array of one "dummy" object to briefly load before the axios call in useEffect could be completed
     const [availUsers, setAvailUsers] = useState([{
         id: null,
@@ -41,15 +43,12 @@ function CreateCard() {
         }
     )
 
-    // const user = state.user
+    const author = state.user
     const title = state.title
     const card_text = state.card_text
     const card_img = state.card_img
-    // const cardPublic = state.cardPublic
+    const cardPublic = state.cardPublic
 
-    // WHERE I'M STUCK: how to take the full input of the form below and send it as a newCard object to the post route
-    // In class components, we would use the form to update the entire state of a component, then pass this.state as an object to the post route.
-    //
     const postNewCard = (e) => {
         e.preventDefault()
         axios
@@ -57,93 +56,70 @@ function CreateCard() {
         .then(
             (response) => {
                 console.log(response);
+                history.push('/home')
             }
         )
-
     }
 
-    // Refactor so one update function for multiple properties?
-    // function update(e, property) {
-    //     setState(prevState => {
-    //         return (...prevState, property: e.target.value)
-    //     })
-    // }
-
-    function updateAuthor(e) {
+    function updateForm(e) {
         setState(prevState => {
-            return {...prevState, user: e.target.value}
-        })
-    }
-
-    function updateTitle(e) {
-        setState(prevState => {
-            return {...prevState, title: e.target.value}
-        })
-    }
-
-    function updateImg(e) {
-        setState(prevState => {
-            return {...prevState, card_img: e.target.value}
-        })
-    }
-
-    function updateText(e) {
-        setState(prevState => {
-            return {...prevState, card_text: e.target.value}
-        })
-    }
-
-    function updateCardPublic(e) {
-        setState(prevState => {
-            return {...prevState, cardPublic: e.target.value}
+            return {...prevState, [e.target.name]: e.target.value}
         })
     }
 
     return (
         <div>
             <h1>Create Card Component</h1>
-            <form onSubmit={postNewCard}>
+                <form onSubmit={postNewCard}>
 
-                <label>Author</label>
+                <InputLabel>Author</InputLabel>
                 <br />
-                <select onChange={updateAuthor}>
+                <Select name="user" onChange={updateForm}>
                     {availUsers.map(user => {
                         return (
-                            <option value={user.id}>{user.username}</option>
+                            <option value={user.id} key={user.id}>{user.username}</option>
                         )
                     })}
-                </select>
+                </Select>
                 <br />
 
-                <label>Title</label>
+                <InputLabel>Title</InputLabel>
                 <br />
-                <input
-                    type="text"
-                    onChange={updateTitle}
+                <Input
+                    name="title"
+                    onChange={updateForm}
+                    aria-describedby="title-text"
                 />
+                <FormHelperText id="title-text">Title</FormHelperText>
                 <br />
 
-                <label>Card Image</label>
+                <InputLabel>Card Image</InputLabel>
                 <br />
-                <input
-                    type="text"
-                    onChange={updateImg}
+                <Input
+                    name="card_img"
+                    onChange={updateForm}
+                    aria-describedby="card_img-text"
                 />
+                <FormHelperText id="card_img-text">Image</FormHelperText>
                 <br />
 
-                <label>Card Text</label>
+                <InputLabel>Card Text</InputLabel>
                 <br />
-                <input
-                    type="text"
-                    onChange={updateText}
+                <TextareaAutosize
+                    name="card_text"
+                    onChange={updateForm}
+                    aria-describedby="card_text"
                 />
+                <FormHelperText id="card_text">Notes</FormHelperText>
                 <br />
 
-                <label>Public</label>
-                <input
-                    type="checkbox"
-                    onChange={updateCardPublic}
+                <InputLabel>Public</InputLabel>
+                <Checkbox
+                    name="cardPublic"
+                    onChange={updateForm}
+                    aria-describedby="cardPublic"
                 />
+                <FormHelperText id="cardPublic">Make public?</FormHelperText>
                 <br />
 
                 <div className="card-preview">
@@ -151,13 +127,14 @@ function CreateCard() {
                     <p>{card_text}</p>
                 </div>
 
-                <input
+                <Input
                     type="submit"
                     value="Create Card"
                 />
-            </form>
+                </form>
         </div>
     )
 }
 
+// export default withRouter(CreateCard)
 export default CreateCard

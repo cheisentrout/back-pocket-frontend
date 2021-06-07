@@ -85,6 +85,7 @@ function EditCard({card}) {
     return (
         <div>
             <h1>Edit Card</h1>
+            <h3></h3>
             <form onSubmit={updateCard}>
 
                 <label>Author</label>

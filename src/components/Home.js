@@ -2,6 +2,7 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { Button } from '@material-ui/core'
 
 /*===== FILES =====*/
 // import CreateCard from './CreateCard'
@@ -52,8 +53,8 @@ function Home() {
     return (
         <div>
             <h1>Home (Profile) Component</h1>
-            <Link to="/createaccount">Add User</Link>
-            <Link to="/createcard">Add Card</Link>
+            <Link to="/createaccount"><Button>Add User</Button></Link>
+            <Link to="/createcard"><Button>Add Card</Button></Link>
             <section>
                 <h3>Search for cards by user:</h3>
                 <form onSubmit={getCards}>
@@ -79,6 +80,8 @@ function Home() {
                                     card={card}
                                 />
                             </details>
+                            {/* HOW can I get each rendered card to have a link to the EditCard component, and when the EditCard component renders, it has access to this specific card? */}
+                            <Link to="/editcard" card={card}>Edit Card Link</Link>
                         </div>
                     )
                 })}
