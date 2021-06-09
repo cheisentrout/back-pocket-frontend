@@ -3,11 +3,27 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '@material-ui/core'
+import styled from 'styled-components'
 
 /*===== FILES =====*/
-// import CreateCard from './CreateCard'
-// import CreateAccount from './CreateAccount'
+
 import EditCard from './EditCard'
+
+/*======== CUSTOM MATERIAL UI COMPONENT STYLES =========*/
+
+const linkStyles = {
+    textDecoration: 'none'
+}
+
+const CustomButton = styled(Button)
+    `background-color: #C6D8FF;
+    text-transform: none;
+    &:hover {
+        background-color: purple;
+    }
+`;
+
+/*======================================================*/
 
 function Home() {
 
@@ -53,8 +69,18 @@ function Home() {
     return (
         <div>
             <h1>Home (Profile) Component</h1>
-            <Link to="/createaccount"><Button>Add User</Button></Link>
-            <Link to="/createcard"><Button>Add Card</Button></Link>
+            <Link to="/createaccount" style={linkStyles}>
+                <CustomButton
+                    variant="contained">
+                    Add User
+                </CustomButton>
+            </Link>
+            <Link to="/createcard" style={linkStyles}>
+                <CustomButton
+                    variant="contained">
+                    Add Card
+                </CustomButton>
+            </Link>
             <section>
                 <h3>Search for cards by user:</h3>
                 <form onSubmit={getCards}>

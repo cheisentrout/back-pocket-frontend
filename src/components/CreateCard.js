@@ -70,6 +70,7 @@ function CreateCard() {
     return (
         <div>
             <h1>Create Card Component</h1>
+            <p>Just writing a paragraph to try and get material ui to git.</p>
                 <form onSubmit={postNewCard}>
 
                 <InputLabel>Author</InputLabel>
