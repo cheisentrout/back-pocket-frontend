@@ -2,7 +2,16 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory, withRouter } from 'react-router-dom'
-import { Button, FormGroup, InputLabel, Input, FormControl, FormHelperText, Select, Checkbox, TextareaAutosize} from '@material-ui/core'
+import {Button,
+        FormGroup,
+        InputLabel,
+        Input,
+        FormControl,
+        FormHelperText,
+        Select,
+        Checkbox,
+        TextareaAutosize,
+        TextField} from '@material-ui/core'
 
 function CreateCard() {
 
@@ -10,7 +19,7 @@ function CreateCard() {
     // Running into an issue where this axios call isn't complete before the component loads, so it initially thinks there ARE no available users -- look into useEffect for this? -- FIX: this was fixed by adding an array of one "dummy" object to briefly load before the axios call in useEffect could be completed
     const [availUsers, setAvailUsers] = useState([{
         id: null,
-        username: ''
+        username: 'select'
     }])
 
     // This queries the back end for user data as soon as the component loads, and sets the state of the component to include the db's response:
@@ -69,8 +78,8 @@ function CreateCard() {
 
     return (
         <div>
-            <h1>Create Card Component</h1>
-            <p>Just writing a paragraph to try and get material ui to git.</p>
+            <h1>create</h1>
+            <p>Add text and images to generate your personal coping card.</p>
                 <form onSubmit={postNewCard}>
 
                 <InputLabel>Author</InputLabel>
@@ -106,7 +115,7 @@ function CreateCard() {
 
                 <InputLabel>Card Text</InputLabel>
                 <br />
-                <TextareaAutosize
+                <TextField
                     name="card_text"
                     onChange={updateForm}
                     aria-describedby="card_text"

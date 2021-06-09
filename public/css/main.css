@@ -1,30 +1,75 @@
+/*============ GLOBAL STYLES ===============*/
+:root {
+    --midnight: #172030;
+    --goldenrod: #A87E13;
+    --palepurple: #ECE6F0;
+    --lilac: #AC9FBF;
+    --orange: #D98E04;
+    --palepink: #F7ECF7;
+    --periwinkle: #ACC6FF;
+    --antique: #FFF5DE;
+}
+
 #root {
     font-family: 'sen';
     font-size: 16px;
+    color: var(--midnight);
+    background: whitesmoke;
+    height: 100vh;
 }
 
 .site-wrapper {
-    margin: 20px;
+    padding: 20px;
 }
+
+img {
+    width: 350px;
+    height: auto;
+}
+
+/*=============== NAV STYLES ===============*/
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     min-height: 10vh;
-    background: whitesmoke;
     padding: 0 20px;
+    background-color: var(--palepurple);
+}
+
+nav h3 {
+    color: var(--goldenrod);
 }
 
 .nav-links {
     list-style: none;
     display: flex;
     justify-content: space-around;
+    transition: .3s;
+}
+
+.nav-links a {
+    color: var(--goldenrod);
+}
+
+.nav-links a:hover {
+    color: var(--lilac);
 }
 
 li {
     margin: 5px;
 }
+
+/*============ HOME STYLES =====================*/
+
+#home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*============ CREATE CARD STYLES ==============*/
 
 option {
     cursor: pointer;

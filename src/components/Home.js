@@ -2,7 +2,7 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Select } from '@material-ui/core'
+import { Button, Select, Input, Modal } from '@material-ui/core'
 import styled from 'styled-components'
 
 /*===== FILES =====*/
@@ -13,7 +13,6 @@ import EditCard from './EditCard'
 
 const linkStyles = {
     textDecoration: 'none',
-
 }
 
 const btnStyles = {
@@ -22,6 +21,7 @@ const btnStyles = {
 }
 
 /*======================================================*/
+/*=================== MAIN COMPONENT ===================*/
 
 function Home() {
 
@@ -40,22 +40,34 @@ function Home() {
         )
     }, [])
 
+    const [selUser, setSelUser] = useState('')
+
+    const updateSelUser = (e) => {
+        setSelUser(prevState => {
+            return {...prevState, [e.target.name]: e.target.value}
+        })
+    }
+
     const [cards, setCards] = useState([])
 
     const getCards = (e) => {
 
         e.preventDefault()
-
         const usersCards = []
-        const selTag = document.getElementById('sel-tag')
-        const selUser = selTag.options[selTag.selectedIndex].value
+        // const selTag = document.getElementById('sel-tag') // just set <select></select> back to reg tag
+        // const selTag = document.querySelector('Select')
+        // const selUser = selTag.options[selTag.selectedIndex].value
 
         axios
         .get('https://tranquil-wildwood-78396.herokuapp.com/pocket/cards')
         .then(
             (response) => {
+                console.log(response.data);
+                console.log(selUser);
+                console.log(selUser.selUser);
                 for (let i = 0; i < response.data.length; i++) {
-                    if (response.data[i].user == selUser) {
+                    if (response.data[i].user == selUser.selUser) {
+                        console.log(response.data[i]);
                         usersCards.push(response.data[i])
                     }
                 }
@@ -65,11 +77,11 @@ function Home() {
     }
 
     return (
-        <div>
-            <h1>Home (Profile) Component</h1>
-            <Link to="/createaccount" style={linkStyles}>
+        <div id="home-container">
+            <h1>gallery</h1>
+            <Link to="/createaccount" style={{linkStyles}}>
                 <Button
-                    style={{btnStyles}}
+                    style={{ backgroundColor: 'purple', color: 'white', textTransform: 'none' }}
                     variant="contained">
                     Add User
                 </Button>
@@ -84,14 +96,20 @@ function Home() {
             <section>
                 <h3>Search for cards by user:</h3>
                 <form onSubmit={getCards}>
-                    <select id="sel-tag">
+                    <Select
+                        id="sel-tag"
+                        name="selUser"
+                        onChange={updateSelUser}>
                         {availUsers.map(user => {
                             return (
                                 <option id={user.id} value={user.id} className="user-selector">{user.username}</option>
                             )
                         })}
-                    </select>
-                    <input type="submit" value="Get Cards" />
+                    </Select>
+                    <Input
+                        type="submit"
+                        value="Get Cards"
+                    />
                 </form>
                 {cards.map((card) => {
                     return (
@@ -100,12 +118,12 @@ function Home() {
                                 <img src={card.card_img} alt={card.title} />
                                 <p>{card.card_text}</p>
                             </div>
-                            <details>
-                            <summary>Edit Card</summary>
-                                <EditCard
-                                    card={card}
-                                />
-                            </details>
+                                <details>
+                                <summary>Edit Card</summary>
+                                    <EditCard
+                                        card={card}
+                                    />
+                                </details>
                             {/* HOW can I get each rendered card to have a link to the EditCard component, and when the EditCard component renders, it has access to this specific card? */}
                             <Link to="/editcard" card={card}>Edit Card Link</Link>
                         </div>
