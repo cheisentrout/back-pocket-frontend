@@ -2,7 +2,7 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Button } from '@material-ui/core'
+import { Button, Select } from '@material-ui/core'
 import styled from 'styled-components'
 
 /*===== FILES =====*/
@@ -12,16 +12,14 @@ import EditCard from './EditCard'
 /*======== CUSTOM MATERIAL UI COMPONENT STYLES =========*/
 
 const linkStyles = {
-    textDecoration: 'none'
+    textDecoration: 'none',
+
 }
 
-const CustomButton = styled(Button)
-    `background-color: #C6D8FF;
-    text-transform: none;
-    &:hover {
-        background-color: purple;
-    }
-`;
+const btnStyles = {
+    textTransform: 'none',
+    backgroundColor: 'purple'
+}
 
 /*======================================================*/
 
@@ -70,16 +68,18 @@ function Home() {
         <div>
             <h1>Home (Profile) Component</h1>
             <Link to="/createaccount" style={linkStyles}>
-                <CustomButton
+                <Button
+                    style={{btnStyles}}
                     variant="contained">
                     Add User
-                </CustomButton>
+                </Button>
             </Link>
             <Link to="/createcard" style={linkStyles}>
-                <CustomButton
+                <Button
+                    style={{ backgroundColor: 'purple', color: 'white', textTransform: 'none' }}
                     variant="contained">
                     Add Card
-                </CustomButton>
+                </Button>
             </Link>
             <section>
                 <h3>Search for cards by user:</h3>
