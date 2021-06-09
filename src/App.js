@@ -3,11 +3,12 @@ import axios from 'axios'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { SmoothProvider } from 'react-smooth-scrolling'
+// import { SmoothProvider } from 'react-smooth-scrolling'
 import { Button } from '@material-ui/core'
 
 /*========== COMPONENT IMPORTS ===========*/
 import Landing from './components/Landing'
+import HeroArea from './components/HeroArea'
 import CreateAccount from './components/CreateAccount'
 import Home from './components/Home'
 import Nav from './components/Nav'
@@ -28,17 +29,15 @@ function App() {
     }
 
     return (
-        <SmoothProvider>
-            <Router>
-                <Nav />
-                <h1>back pocket</h1>
-                <Route path="/home" component={Home}/>
-                <Route path="/landing" component={Landing} />
-                <Route path="/createaccount" component={CreateAccount} />
-                <Route path="/createcard" component={CreateCard} />
-                <Route path="/editcard" component={EditCard} />
-            </Router>
-        </SmoothProvider>
+        <Router>
+            <Nav />
+            <HeroArea />
+            <Route path="/home" component={Home}/>
+            <Route path="/landing" component={Landing} />
+            <Route path="/createaccount" component={CreateAccount} />
+            <Route path="/createcard" component={CreateCard} />
+            <Route path="/editcard" component={EditCard} />
+        </Router>
     )
 }
 

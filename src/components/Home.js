@@ -2,7 +2,7 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Select, Input, Modal } from '@material-ui/core'
+import { Button, Select, Input, Modal, ButtonGroup } from '@material-ui/core'
 import styled from 'styled-components'
 
 /*===== FILES =====*/
@@ -17,7 +17,7 @@ const linkStyles = {
 
 const btnStyles = {
     textTransform: 'none',
-    backgroundColor: 'purple'
+    backgroundColor: '#AC9FBF'
 }
 
 /*======================================================*/
@@ -54,9 +54,6 @@ function Home() {
 
         e.preventDefault()
         const usersCards = []
-        // const selTag = document.getElementById('sel-tag') // just set <select></select> back to reg tag
-        // const selTag = document.querySelector('Select')
-        // const selUser = selTag.options[selTag.selectedIndex].value
 
         axios
         .get('https://tranquil-wildwood-78396.herokuapp.com/pocket/cards')
@@ -79,21 +76,23 @@ function Home() {
     return (
         <div id="home-container">
             <h1>gallery</h1>
-            <Link to="/createaccount" style={{linkStyles}}>
-                <Button
-                    style={{ backgroundColor: 'purple', color: 'white', textTransform: 'none' }}
-                    variant="contained">
-                    Add User
-                </Button>
-            </Link>
-            <Link to="/createcard" style={linkStyles}>
-                <Button
-                    style={{ backgroundColor: 'purple', color: 'white', textTransform: 'none' }}
-                    variant="contained">
-                    Add Card
-                </Button>
-            </Link>
-            <section>
+            <ButtonGroup>
+                <Link to="/createaccount" style={{ textDecoration: 'none' }}>
+                    <Button
+                        style={{ backgroundColor: '#A87E13', color: '#ECE6F0', textTransform: 'none', margin: '5px' }}
+                        variant="contained">
+                        Sign Up
+                    </Button>
+                </Link>
+                <Link to="/createcard" style={linkStyles}>
+                    <Button
+                        style={{ backgroundColor: '#A87E13', color: '#ECE6F0', textTransform: 'none', margin: '5px' }}
+                        variant="contained">
+                        Create Card
+                    </Button>
+                </Link>
+            </ButtonGroup>
+            <section id="user-search">
                 <h3>Search for cards by user:</h3>
                 <form onSubmit={getCards}>
                     <Select
@@ -109,27 +108,32 @@ function Home() {
                     <Input
                         type="submit"
                         value="Get Cards"
+                        style={btnStyles}
                     />
                 </form>
+            </section>
+            <div id="gallery-wrapper">
                 {cards.map((card) => {
                     return (
-                        <div id={card.id}>
+                        <div className="card-each" key={card.id}>
                             <div className="card" id={card.id}>
                                 <img src={card.card_img} alt={card.title} />
                                 <p>{card.card_text}</p>
                             </div>
+                            <div id="edit-opts">
                                 <details>
                                 <summary>Edit Card</summary>
                                     <EditCard
                                         card={card}
                                     />
                                 </details>
-                            {/* HOW can I get each rendered card to have a link to the EditCard component, and when the EditCard component renders, it has access to this specific card? */}
-                            <Link to="/editcard" card={card}>Edit Card Link</Link>
+                                {/* HOW can I get each rendered card to have a link to the EditCard component, and when the EditCard component renders, it has access to this specific card? */}
+                                <Link to="/editcard" card={card}>Edit Card Link</Link>
+                            </div>
                         </div>
                     )
                 })}
-            </section>
+            </div>
         </div>
     )
 }
