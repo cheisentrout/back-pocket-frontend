@@ -31,8 +31,7 @@ function App() {
         <SmoothProvider>
             <Router>
                 <Nav />
-                <h1>Back Pocket App</h1>
-                <Button>Test Material Button</Button>
+                <h1>back pocket</h1>
                 <Route path="/home" component={Home}/>
                 <Route path="/landing" component={Landing} />
                 <Route path="/createaccount" component={CreateAccount} />
