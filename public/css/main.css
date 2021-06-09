@@ -1,34 +1,134 @@
-#root {
-    font-family: 'sen';
+/*============ GLOBAL STYLES ===============*/
+:root {
+    --midnight: #172030;
+    --goldenrod: #A87E13;
+    --palepurple: #ECE6F0;
+    --lilac: #AC9FBF;
+    --orange: #D98E04;
+    --palepink: #F7ECF7;
+    --periwinkle: #ACC6FF;
+    --antique: #FFF5DE;
 }
 
-.site-wrapper {
-    margin: 20px;
+#root {
+    font-family: 'sen';
+    font-size: 16px;
+    color: var(--midnight);
+    background: whitesmoke;
+    height: 100vh;
+    padding: 20px;
 }
+
+/* .site-wrapper {
+    padding: 20px;
+} */
+
+/* img {
+    width: 350px;
+    height: auto;
+} */
+
+/*=============== NAV STYLES ===============*/
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     min-height: 10vh;
-    background: whitesmoke;
     padding: 0 20px;
+    background-color: var(--palepurple);
+}
+
+nav h3 {
+    color: var(--goldenrod);
 }
 
 .nav-links {
     list-style: none;
     display: flex;
     justify-content: space-around;
+    transition: .3s;
+}
+
+.nav-links a {
+    color: var(--goldenrod);
+}
+
+.nav-links a:hover {
+    color: var(--lilac);
 }
 
 li {
     margin: 5px;
 }
 
+/*============ HOME STYLES =====================*/
+
+#home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: whitesmoke;
+    /* height: 100vh; */
+}
+
+/*=== Card Styles (w/i Home Component) ===*/
+
+#user-search {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#gallery-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+}
+
+/* The div that contains the card, and the Edit form: */
+.card-each {
+    background: whitesmoke;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.card {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid gold;
+}
+
+.card p {
+    width: 250px;
+}
+
+.card img {
+    width: 40vmin;
+    height: 40vmin;
+    min-width: 200px;
+    min-height: 200px;
+    object-fit: cover;
+}
+
+#edit-opts {
+    width: 100%;
+}
+
+/*============ CREATE CARD STYLES ==============*/
+
 option {
     cursor: pointer;
+    padding: 10px;
 }
 
 option:hover {
-    background: whitesmoke;
+    background: var(--palepink);
+}
+
+.MuiButton-root {
+    text-transform: none;
 }
