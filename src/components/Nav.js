@@ -16,13 +16,13 @@ function Nav() {
 
     return (
         <nav>
-            <h3>back pocket</h3>
+            <img id="logo" src="../../img/bp_text_logo.png" alt="back pocket" />
             <ul className="nav-links">
                 <Link to="/home" style={linkStyles}>
-                    <li>Home</li>
+                    <li>home</li>
                 </Link>
                 <Link to="/createcard" style={linkStyles}>
-                    <li>Create Card</li>
+                    <li>create</li>
                 </Link>
             </ul>
         </nav>

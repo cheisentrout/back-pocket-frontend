@@ -17,7 +17,10 @@ const linkStyles = {
 
 const btnStyles = {
     textTransform: 'none',
-    backgroundColor: '#AC9FBF'
+    backgroundColor: '#ECE6F0',
+    padding: '0px 5px',
+    borderRadius: '10px',
+    marginLeft: '10px'
 }
 
 /*======================================================*/
@@ -40,7 +43,7 @@ function Home() {
         )
     }, [])
 
-    const [selUser, setSelUser] = useState('')
+    const [selUser, setSelUser] = useState('all')
 
     const updateSelUser = (e) => {
         setSelUser(prevState => {
@@ -53,6 +56,7 @@ function Home() {
     const getCards = (e) => {
 
         e.preventDefault()
+        console.log(selUser);
         const usersCards = []
 
         axios
@@ -60,12 +64,14 @@ function Home() {
         .then(
             (response) => {
                 console.log(response.data);
-                console.log(selUser);
-                console.log(selUser.selUser);
-                for (let i = 0; i < response.data.length; i++) {
-                    if (response.data[i].user == selUser.selUser) {
-                        console.log(response.data[i]);
-                        usersCards.push(response.data[i])
+                if (selUser === 'all') {
+                    response.data.map(item => usersCards.push(item))
+                } else {
+                    for (let i = 0; i < response.data.length; i++) {
+                        if (response.data[i].user == selUser.selUser) {
+                            console.log(response.data[i]);
+                            usersCards.push(response.data[i])
+                        }
                     }
                 }
                 setCards(usersCards)
@@ -75,7 +81,6 @@ function Home() {
 
     return (
         <div id="home-container">
-            <h1>gallery</h1>
             <ButtonGroup>
                 <Link to="/createaccount" style={{ textDecoration: 'none' }}>
                     <Button
@@ -94,20 +99,21 @@ function Home() {
             </ButtonGroup>
             <section id="user-search">
                 <h3>Search for cards by user:</h3>
-                <form onSubmit={getCards}>
+                <form onSubmit={getCards} id="get-cards-form">
                     <Select
                         id="sel-tag"
                         name="selUser"
                         onChange={updateSelUser}>
+                        <option>all</option>
                         {availUsers.map(user => {
                             return (
-                                <option id={user.id} value={user.id} className="user-selector">{user.username}</option>
+                                    <option id={user.id} value={user.id} className="user-selector">{user.username}</option>
                             )
                         })}
                     </Select>
                     <Input
                         type="submit"
-                        value="Get Cards"
+                        value="get cards"
                         style={btnStyles}
                     />
                 </form>

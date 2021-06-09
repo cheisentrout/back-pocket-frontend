@@ -1,9 +1,10 @@
 /*============ GLOBAL STYLES ===============*/
 :root {
     --midnight: #172030;
+    --fademidnight: #172030b3;
     --goldenrod: #A87E13;
     --palepurple: #ECE6F0;
-    --lilac: #AC9FBF;
+    --lilac: #836ca5;
     --orange: #D98E04;
     --palepink: #F7ECF7;
     --periwinkle: #ACC6FF;
@@ -13,20 +14,25 @@
 #root {
     font-family: 'sen';
     font-size: 16px;
-    color: var(--midnight);
+    color: var(--fademidnight);
     background: whitesmoke;
     height: 100vh;
     padding: 20px;
+    box-sizing: border-box;
 }
 
-/* .site-wrapper {
-    padding: 20px;
-} */
+#logo {
+    width: 50px;
+    height: 50px;
+}
 
-/* img {
-    width: 350px;
-    height: auto;
-} */
+h1, h2, h3 {
+    font-weight: lighter;
+}
+
+h1, h2 {
+    font-family: 'playfair display';
+}
 
 /*=============== NAV STYLES ===============*/
 
@@ -47,44 +53,96 @@ nav h3 {
     list-style: none;
     display: flex;
     justify-content: space-around;
+    width: 25%;
     transition: .3s;
 }
 
 .nav-links a {
-    color: var(--goldenrod);
+    color: var(--lilac);
 }
 
 .nav-links a:hover {
-    color: var(--lilac);
+    color: var(--periwinkle);
 }
 
 li {
     margin: 5px;
 }
 
-/*============ HOME STYLES =====================*/
+/*============ HERO AREA STYLES ================*/
+
+#heroarea-container {
+    /* background: url('https://images.unsplash.com/photo-1620550580806-9426033a77a3?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDI1fHFQWXNEenZKT1ljfHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'); */
+    background-image: linear-gradient(var(--palepurple), var(--palepink), whitesmoke);
+    background-size: cover;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    text-align: center;
+}
+
+#heroarea-container h1 {
+    margin: 0px;
+    font-family: 'playfair display';
+    color: var(--midnight);
+    font-weight: normal;
+    font-size: 5em;
+    letter-spacing: .1em;
+    width: 100%;
+    text-align: center;
+}
+
+#heroarea-container p {
+    color: var(--lilac);
+    animation: fadeIn;
+    animation-duration: 2s;
+}
+
+/*=============== HOME STYLES ==================*/
 
 #home-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     background: whitesmoke;
+    margin-top: 40px;
     /* height: 100vh; */
 }
 
-/*=== Card Styles (w/i Home Component) ===*/
+#home-container h1 {
+    font-size: 1.8em;
+    margin-top: 40px;
+}
+
+#sel-tag {
+    min-width: 100px;
+    transition: .5s;
+    border-radius: 10px;
+}
+
+#sel-tag:hover {
+    background: var(--palepink);
+}
+
+option {
+    cursor: pointer;
+    padding: 10px;
+    transition: .5s;
+}
+
+option:hover {
+    background: var(--palepink);
+    color: var(--periwinkle);
+}
 
 #user-search {
     text-align: center;
     margin-bottom: 50px;
 }
 
-#gallery-wrapper {
-    display: flex;
-    justify-content: center;
-    flex-flow: row wrap;
-}
-
+/*=== Card Styles (w/i Home Component) ===*/
 /* The div that contains the card, and the Edit form: */
 .card-each {
     background: whitesmoke;
@@ -95,40 +153,38 @@ li {
 
 .card {
     display: flex;
-    width: 100%;
+    width: 90%;
+    max-width: 580px;
     justify-content: space-around;
     align-items: center;
     padding: 10px;
-    border: 1px solid gold;
+    border: 2px solid var(--goldenrod);
+    border-radius: 5px;
+    background: #acc6ff33;
 }
 
 .card p {
-    width: 250px;
+    min-width: 150px;
+    max-width: 300px;
+    margin-left: 10px;
 }
 
 .card img {
     width: 40vmin;
     height: 40vmin;
-    min-width: 200px;
-    min-height: 200px;
+    min-width: 180px;
+    min-height: 180px;
     object-fit: cover;
+    border-radius: 5px;
 }
 
 #edit-opts {
-    width: 100%;
+    width: 50%;
+    text-align: center;
 }
 
 /*============ CREATE CARD STYLES ==============*/
 
-option {
-    cursor: pointer;
-    padding: 10px;
-}
-
-option:hover {
-    background: var(--palepink);
-}
-
-.MuiButton-root {
-    text-transform: none;
+#create-container {
+    background: whitesmoke;
 }

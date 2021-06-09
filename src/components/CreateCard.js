@@ -13,6 +13,18 @@ import {Button,
         TextareaAutosize,
         TextField} from '@material-ui/core'
 
+/*====== CUSTOM COMPONENT STYLES ======*/
+
+const btnStyles = {
+    textTransform: 'none',
+    backgroundColor: '#ECE6F0',
+    padding: '0px 5px',
+    borderRadius: '10px',
+    margin: '20px auto'
+}
+
+/*======================================*/
+
 function CreateCard() {
 
     const history = useHistory()
@@ -33,14 +45,7 @@ function CreateCard() {
         )
     }, [])
 
-    // My thought here was: if we have a newCard object who's state updates dynamically, we can set the keys to the form fields on the back end, and the values to the states that are being updated by each form field on the front end. Every time someone changes the cardTitle, ideally the newCard state would update as well...
-    // const [newCard, setNewCard] = useState({
-    //     user: cardAuthor,
-    //     title: cardTitle,
-    //     card_text: cardText,
-    //     card_image: cardImg,
-    //     public: cardVisibility
-    // })
+    // Add a form here that asks you to identify yourself as the current user, set the state of the component to have a currentUser, then automatically set that state to occupy the author field
 
     const [state, setState] = useState(
         {
@@ -60,6 +65,9 @@ function CreateCard() {
 
     const postNewCard = (e) => {
         e.preventDefault()
+        if (author === "" || title === "" || card_text === "" || card_img === "" ) {
+            alert('Please complete every form field to create your card!')
+        }
         axios
         .post('https://tranquil-wildwood-78396.herokuapp.com/pocket/cards', state)
         .then(
@@ -80,20 +88,20 @@ function CreateCard() {
         <div>
             <h1>create</h1>
             <p>Add text and images to generate your personal coping card.</p>
+            <div  id="create-container">
                 <form onSubmit={postNewCard}>
 
-                <InputLabel>Author</InputLabel>
                 <br />
-                <Select name="user" onChange={updateForm}>
+                <Select name="user" onChange={updateForm} aria-describedby="author-text">
                     {availUsers.map(user => {
                         return (
                             <option value={user.id} key={user.id}>{user.username}</option>
                         )
                     })}
                 </Select>
+                <FormHelperText id="author-text">Author</FormHelperText>
                 <br />
 
-                <InputLabel>Title</InputLabel>
                 <br />
                 <Input
                     name="title"
@@ -103,7 +111,6 @@ function CreateCard() {
                 <FormHelperText id="title-text">Title</FormHelperText>
                 <br />
 
-                <InputLabel>Card Image</InputLabel>
                 <br />
                 <Input
                     name="card_img"
@@ -113,7 +120,6 @@ function CreateCard() {
                 <FormHelperText id="card_img-text">Image</FormHelperText>
                 <br />
 
-                <InputLabel>Card Text</InputLabel>
                 <br />
                 <TextField
                     name="card_text"
@@ -123,28 +129,29 @@ function CreateCard() {
                 <FormHelperText id="card_text">Notes</FormHelperText>
                 <br />
 
-                <InputLabel>Public</InputLabel>
                 <Checkbox
                     name="cardPublic"
                     onChange={updateForm}
+                    style={{ color: 'purple' }}
                     aria-describedby="cardPublic"
                 />
                 <FormHelperText id="cardPublic">Make public?</FormHelperText>
                 <br />
 
-                <div className="card-preview">
-                    <img src={card_img} alt={title} />
-                    <p>{card_text}</p>
+                <div className="card">
+                    <img src={card_img} alt={title} className="animate__animated animate__fadeIn"/>
+                    <p className="animate__animated animate__fadeIn">{card_text}</p>
                 </div>
 
                 <Input
                     type="submit"
                     value="Create Card"
+                    style={btnStyles}
                 />
                 </form>
+            </div>
         </div>
     )
 }
 
-// export default withRouter(CreateCard)
 export default CreateCard

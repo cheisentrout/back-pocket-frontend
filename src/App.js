@@ -14,6 +14,7 @@ import Home from './components/Home'
 import Nav from './components/Nav'
 import CreateCard from './components/CreateCard'
 import EditCard from './components/EditCard'
+import Footer from './components/Footer'
 
 /*============= APP FUNCTION =============*/
 function App() {
@@ -37,6 +38,7 @@ function App() {
             <Route path="/createaccount" component={CreateAccount} />
             <Route path="/createcard" component={CreateCard} />
             <Route path="/editcard" component={EditCard} />
+            <Footer />
         </Router>
     )
 }
