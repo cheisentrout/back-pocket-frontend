@@ -28,7 +28,7 @@ const btnStyles = {
 function CreateCard() {
 
     const history = useHistory()
-    // Running into an issue where this axios call isn't complete before the component loads, so it initially thinks there ARE no available users -- look into useEffect for this? -- FIX: this was fixed by adding an array of one "dummy" object to briefly load before the axios call in useEffect could be completed
+
     const [availUsers, setAvailUsers] = useState([{
         id: null,
         username: 'select'
